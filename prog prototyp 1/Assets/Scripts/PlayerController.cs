@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 7f;
     public float jumpForce = 8f;
+	public bool acceleration = false;
     [Space(10)]
     public bool allowFly;
     public float flyMultiplier = 1f;
@@ -41,16 +42,19 @@ public class PlayerController : MonoBehaviour
     }
     void Movement()
     {
-        Vector3 position = new Vector3(transform.position.x, transform.position.y,transform.position.z);       
+		Vector3 position = transform.position;       
 
-        if (move_left)
-        {
-            position.x -= speed * Time.deltaTime;
-        }
-        if (move_right)
-        {
-            position.x += speed * Time.deltaTime;
-        }
+		float moveX = Input.GetAxis ("Horizontal");
+		float moveXraw = Input.GetAxisRaw ("Horizontal");
+
+		if (acceleration)
+		{
+			position.x += moveX * speed * Time.deltaTime;
+		}
+		else 
+		{
+			position.x += moveXraw * speed * Time.deltaTime;
+		}
 
         if (jump)
         {
