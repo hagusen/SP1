@@ -196,6 +196,21 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 35.23
       objectReference: {fileID: 0}
+    - target: {fileID: 212284681906156344, guid: aac5de21d7db8654a8616d3e1191088a,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212284681906156344, guid: aac5de21d7db8654a8616d3e1191088a,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9705882
+      objectReference: {fileID: 0}
+    - target: {fileID: 212284681906156344, guid: aac5de21d7db8654a8616d3e1191088a,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.16734283
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aac5de21d7db8654a8616d3e1191088a, type: 2}
   m_IsPrefabParent: 0
@@ -821,6 +836,7 @@ GameObject:
   - component: {fileID: 1364425749}
   - component: {fileID: 1364425748}
   - component: {fileID: 1364425750}
+  - component: {fileID: 1364425751}
   - component: {fileID: 235528035}
   - component: {fileID: 235528032}
   m_Layer: 0
@@ -844,13 +860,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   jumpForce: 10
+  acceleration: 0
   allowFly: 0
   flyMultiplier: 1
   ignorePlatformCollision: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  coinCountText: {fileID: 1527602506}
   allowCrossScreen: 1
   cam: {fileID: 962498861}
 --- !u!212 &1364425749
@@ -911,6 +927,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   freezeTimer: 2
   hellfire: {fileID: 2066164622}
+--- !u!114 &1364425751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1364425747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eee43579e2a4f34e81cfa1c24e2cdcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinCountText: {fileID: 1527602506}
 --- !u!1001 &1393891491
 Prefab:
   m_ObjectHideFlags: 0
@@ -968,6 +996,21 @@ Prefab:
         type: 2}
       propertyPath: hellfire
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212327207629739814, guid: 6153c6a68fdfbfa48ac22a29a2de8d13,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.78676474
+      objectReference: {fileID: 0}
+    - target: {fileID: 212327207629739814, guid: 6153c6a68fdfbfa48ac22a29a2de8d13,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.069420435
+      objectReference: {fileID: 0}
+    - target: {fileID: 212327207629739814, guid: 6153c6a68fdfbfa48ac22a29a2de8d13,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.069420435
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6153c6a68fdfbfa48ac22a29a2de8d13, type: 2}

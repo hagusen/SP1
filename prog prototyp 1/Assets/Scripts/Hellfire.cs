@@ -21,11 +21,11 @@ public class Hellfire : MonoBehaviour
         if (hellfire)
         {
             position.y += speed * Time.deltaTime;
-            _SpriteRenderer.color = Color.yellow;
+            _SpriteRenderer.color = Color.red;
         }
         else
         {
-            _SpriteRenderer.color = Color.blue;
+            _SpriteRenderer.color = Color.cyan;
         }
         transform.localPosition = position;
 	}
