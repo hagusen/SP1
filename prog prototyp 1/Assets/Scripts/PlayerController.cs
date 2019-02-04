@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,9 +18,6 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     private bool move_left, move_right, move_up, jump;
 
-    public Text coinCountText;
-    private int coinCount;
-
     public bool allowCrossScreen = false;
     public CameraController cam;
     private float radius;
@@ -29,8 +25,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        radius = GetComponent<BoxCollider2D>().size.x / 2; //ändra boxcollider till den aktiva collidern på spelarobjektet    
-        SetCountText();
+        radius = GetComponent<BoxCollider2D>().size.x / 2; //ändra boxcollider till den aktiva collidern på spelarobjektet          
     }
 
     private void Update()
@@ -38,7 +33,6 @@ public class PlayerController : MonoBehaviour
         PlayerInput();
         Movement();
         HandleBounds();
-        SetCountText();
     }
     void Movement()
     {
@@ -101,13 +95,14 @@ public class PlayerController : MonoBehaviour
     bool IsGrounded()
     {
         Vector3 position = transform.position;
-        Vector3 direction = Vector3.down;
-        float distance = 1f;
+        Vector3 direction1 = new Vector3(0.5f, -1f, 0f);
+        Vector3 direction2 = new Vector3(-0.5f, -1f, 0f);
+        float distance = .8f;
 
-        Debug.DrawRay(position, direction, Color.green);
+        Debug.DrawRay(position, direction1, Color.green);
+        Debug.DrawRay(position, direction2, Color.green);
         //raycast under spelaren som kollar om spelaren är grounded eller inte grounded
-        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
-        if (hit.collider != null)
+        if (Physics2D.Raycast(position, direction1, distance, groundLayer) || Physics2D.Raycast(position, direction2, distance, groundLayer))
         {
             return true;
         }
@@ -126,17 +121,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.CompareTag("Coin"))
-        {
-            Destroy(collision.gameObject);
-            coinCount++;
-        }
-
         if (collision.gameObject.CompareTag("Hellfire"))
         {
             //GAME OVER
             SceneManager.LoadScene("start");
-            coinCount = 0;
         }
     }
    
@@ -185,10 +173,5 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.localPosition = position;
-    }
-
-    void SetCountText()
-    {
-        coinCountText.text = "Coins: " + coinCount.ToString();
     }
 }

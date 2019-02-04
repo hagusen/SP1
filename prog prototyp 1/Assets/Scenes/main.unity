@@ -821,6 +821,7 @@ GameObject:
   - component: {fileID: 1364425749}
   - component: {fileID: 1364425748}
   - component: {fileID: 1364425750}
+  - component: {fileID: 1364425751}
   - component: {fileID: 235528035}
   - component: {fileID: 235528032}
   m_Layer: 0
@@ -844,13 +845,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   jumpForce: 10
+  acceleration: 0
   allowFly: 0
   flyMultiplier: 1
   ignorePlatformCollision: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  coinCountText: {fileID: 1527602506}
   allowCrossScreen: 1
   cam: {fileID: 962498861}
 --- !u!212 &1364425749
@@ -911,6 +912,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   freezeTimer: 2
   hellfire: {fileID: 2066164622}
+--- !u!114 &1364425751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1364425747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eee43579e2a4f34e81cfa1c24e2cdcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinCountText: {fileID: 1527602506}
 --- !u!1001 &1393891491
 Prefab:
   m_ObjectHideFlags: 0
