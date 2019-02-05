@@ -1,1 +1,13 @@
 Score manager
+
+
+
+
+
+Q. player dies
+
+A1. Reload scene (startover)
+{Stuff to save globally, (inactive coins?[already taken])}
+
+A2. Reload at Checkpoint?
+
