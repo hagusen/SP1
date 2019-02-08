@@ -42,7 +42,7 @@ public class PlayerControllerWithJump : MonoBehaviour
     }
     void Movement()
     {
-		Vector3 position = transform.position;       
+		//Vector3 position = transform.position;       
 
 		float moveX = Input.GetAxis ("Horizontal");
 		float moveXraw = Input.GetAxisRaw ("Horizontal");
@@ -56,7 +56,7 @@ public class PlayerControllerWithJump : MonoBehaviour
 			transform.position += Vector3.right * moveXraw * speed * Time.deltaTime;
 		}
 
-        if (Input.GetButton("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
 
             if (!IsGrounded())
@@ -65,7 +65,7 @@ public class PlayerControllerWithJump : MonoBehaviour
             }
             else
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                rb.velocity += new Vector2(0, jumpForce);
             }
         }
 
@@ -74,7 +74,7 @@ public class PlayerControllerWithJump : MonoBehaviour
             if (Input.GetButton("Jump"))
             {
                 rb.isKinematic = true; //ta bort fysiken från rigidbody
-                position.y += speed * flyMultiplier * Time.deltaTime;             
+                transform.position += Vector3.up * speed * flyMultiplier * Time.deltaTime;             
             }   
         }
         if (!allowFly)
