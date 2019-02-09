@@ -13,7 +13,7 @@ public class ChaseState : IEnemyState {
 
     public void UpdateState()
     {
-        enemy.GetComponent<SpriteRenderer>().color = Color.red;
+        enemy.sprite.color = Color.red;
         Chase();       
     }
 
@@ -42,7 +42,6 @@ public class ChaseState : IEnemyState {
 
     public void Chase()
     {
-        //chase the player
         enemy.transform.position = Vector2.MoveTowards(enemy.transform.position, enemy.chaseTarget.position, enemy.speed * Time.deltaTime);
         //play chase animation
     }

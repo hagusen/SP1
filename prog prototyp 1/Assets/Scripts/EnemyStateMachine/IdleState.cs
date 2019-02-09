@@ -14,7 +14,7 @@ public class IdleState : IEnemyState
     public void UpdateState()
     {        
         Idle();
-        enemy.GetComponent<SpriteRenderer>().color = Color.black;
+        enemy.sprite.color = Color.black;
     }
 
     public void OnTrigger(Collider2D other)

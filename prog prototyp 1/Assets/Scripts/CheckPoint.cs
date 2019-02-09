@@ -12,6 +12,8 @@ public class CheckPoint : MonoBehaviour {
 
     private void Start()
     {
+        CheckPointManager cpManager = GetComponent<CheckPointManager>();
+        Hellfire hellfire = GetComponent<Hellfire>();
         sprite = GetComponent<SpriteRenderer>();
     }
 

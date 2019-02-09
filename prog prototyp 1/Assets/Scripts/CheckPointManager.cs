@@ -11,6 +11,12 @@ public class CheckPointManager : MonoBehaviour
     public Vector2 lastCheckpointPosition;
     public Vector2 hellfirePosition;
 
+    private void Start()
+    {
+        CameraController cam = GetComponent<CameraController>();
+        Hellfire hellfire = GetComponent<Hellfire>();
+    }
+
     void Update ()
     {
         OutOfBounds();
