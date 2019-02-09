@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerInput();
         Movement();
-        HandleBounds();
+        CrossScreen();
     }
     void Movement()
     {
@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
 
         if (jump)
         {
-
             if (!IsGrounded())
             {
                 return;
@@ -81,13 +80,9 @@ public class PlayerController : MonoBehaviour
 
     void PlayerInput()
     {
-        bool input_left = Input.GetKey(KeyCode.A);
-        bool input_right = Input.GetKey(KeyCode.D);
         bool input_up = Input.GetKey(KeyCode.W);
         bool input_jump = Input.GetKeyDown(KeyCode.Space);
 
-        move_left = input_left;
-        move_right = input_right;
         move_up = input_up;
         jump = input_jump;
     }
@@ -116,16 +111,9 @@ public class PlayerController : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Platform"))
             {
-                Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), collision.gameObject.GetComponent<BoxCollider2D>(), true);
-                
+                Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), collision.gameObject.GetComponent<BoxCollider2D>(), true);   
             }
-        }
-
-        if (collision.gameObject.CompareTag("Hellfire"))
-        {
-            //GAME OVER
-            SceneManager.LoadScene("start");
-        }
+        } 
     }
    
     private void OnTriggerExit2D(Collider2D collision)
@@ -139,7 +127,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void HandleBounds()
+    void CrossScreen()
     {
         Vector3 position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         //Skickar spelaren till andra sidan skärmen om han hamnar utanför
@@ -164,13 +152,7 @@ public class PlayerController : MonoBehaviour
             {
                 position.x = -cam.width / 2 + radius;
             }
-        }
-
-        if (transform.position.y < cam.boundary)
-        {
-            //GAME OVER
-            SceneManager.LoadScene("main");
-        }
+        } 
 
         transform.localPosition = position;
     }

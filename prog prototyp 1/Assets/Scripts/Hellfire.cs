@@ -4,28 +4,29 @@ using UnityEngine;
 
 public class Hellfire : MonoBehaviour
 {
-    public float speed = 3f;
     public bool hellfire = true;
 
-    SpriteRenderer _SpriteRenderer;
+    public float speed = 3f;
+
+    SpriteRenderer sprite;
 
     private void Start()
     {
-        _SpriteRenderer = GetComponent<SpriteRenderer>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update ()
     {
-        Vector3 position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        Vector2 position = new Vector2(transform.position.x, transform.position.y);
 
         if (hellfire)
         {
             position.y += speed * Time.deltaTime;
-            _SpriteRenderer.color = Color.red;
+            sprite.color = Color.red;
         }
         else
         {
-            _SpriteRenderer.color = Color.cyan;
+            sprite.color = Color.cyan;
         }
         transform.localPosition = position;
 	}
