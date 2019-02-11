@@ -16,47 +16,50 @@ public class PlayerController : MonoBehaviour
     [Space(10)]
     public bool ignorePlatformCollision;
     public LayerMask groundLayer;
-    private bool move_left, move_right, move_up, jump;
 
     public bool allowCrossScreen = false;
     public CameraController cam;
     private float radius;
-  
+
+    [Header("Jump")]
+    public float fallMultiplier;
+    public float lowJumpMultiplier;
+
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        radius = GetComponent<BoxCollider2D>().size.x / 2; //ändra boxcollider till den aktiva collidern på spelarobjektet          
+        radius = GetComponent<BoxCollider2D>().size.x / 2; //ändra boxcollider till den aktiva collidern på spelarobjektet  
     }
 
     private void Update()
     {
-        PlayerInput();
+
+
         Movement();
-        CrossScreen();
+        HandleBounds();
     }
     void Movement()
     {
-		Vector3 position = transform.position;       
+		//Vector3 position = transform.position;       
 
 		float moveX = Input.GetAxis ("Horizontal");
 		float moveXraw = Input.GetAxisRaw ("Horizontal");
 
 		if (acceleration)
 		{
-			position.x += moveX * speed * Time.deltaTime;
+			transform.Translate(Vector3.right * moveX * speed * Time.deltaTime);
 		}
 		else 
 		{
-			position.x += moveXraw * speed * Time.deltaTime;
+			transform.Translate(Vector3.right * moveXraw * speed * Time.deltaTime);
 		}
 
-        if (jump)
+        if (Input.GetButtonDown("Jump"))
         {
-            if (!IsGrounded())
-            {
-                return;
-            }
-            else
+
+            if (IsGrounded())
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
@@ -64,28 +67,27 @@ public class PlayerController : MonoBehaviour
 
         if (allowFly)
         {
-            if (move_up)
+            if (Input.GetButton("Jump"))
             {
                 rb.isKinematic = true; //ta bort fysiken från rigidbody
-                position.y += speed * flyMultiplier * Time.deltaTime;             
+                transform.position += Vector3.up * speed * flyMultiplier * Time.deltaTime;             
             }   
         }
         if (!allowFly)
         {
             rb.isKinematic = false;   
         }
+
+        if (rb.velocity.y < 0)
+            rb.velocity += new Vector2(0, Physics2D.gravity.y * fallMultiplier - 1) * Time.deltaTime;
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+            rb.velocity += new Vector2(0, Physics2D.gravity.y * lowJumpMultiplier - 1) * Time.deltaTime;
+
         //slutgiltlig transformation
-        transform.localPosition = position;
+        //transform.position = position;
     }
 
-    void PlayerInput()
-    {
-        bool input_up = Input.GetKey(KeyCode.W);
-        bool input_jump = Input.GetKeyDown(KeyCode.Space);
 
-        move_up = input_up;
-        jump = input_jump;
-    }
 
     bool IsGrounded()
     {
@@ -111,9 +113,16 @@ public class PlayerController : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Platform"))
             {
-                Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), collision.gameObject.GetComponent<BoxCollider2D>(), true);   
+                Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), collision.gameObject.GetComponent<BoxCollider2D>(), true);
+                
             }
-        } 
+        }
+
+        if (collision.gameObject.CompareTag("Hellfire"))
+        {
+            //GAME OVER
+            SceneManager.LoadScene("start");
+        }
     }
    
     private void OnTriggerExit2D(Collider2D collision)
@@ -127,7 +136,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void CrossScreen()
+    void HandleBounds()
     {
         Vector3 position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         //Skickar spelaren till andra sidan skärmen om han hamnar utanför
@@ -152,7 +161,13 @@ public class PlayerController : MonoBehaviour
             {
                 position.x = -cam.width / 2 + radius;
             }
-        } 
+        }
+
+        if (transform.position.y < cam.boundary)
+        {
+            //GAME OVER
+            SceneManager.LoadScene("main");
+        }
 
         transform.localPosition = position;
     }

@@ -249,7 +249,7 @@ Transform:
   m_GameObject: {fileID: 1364425747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 633726628}
   m_Father: {fileID: 0}
@@ -1229,7 +1229,6 @@ GameObject:
   m_Component:
   - component: {fileID: 235528034}
   - component: {fileID: 1364425749}
-  - component: {fileID: 1364425748}
   - component: {fileID: 1364425750}
   - component: {fileID: 1364425751}
   - component: {fileID: 235528035}
@@ -1243,29 +1242,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1364425748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114220498020603088, guid: 6145e32ea7b1d6845a320a1df9a21336,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1364425747}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf402eaa41ecf31499b316cb2836fdba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 7
-  jumpForce: 10
-  acceleration: 0
-  allowFly: 0
-  flyMultiplier: 1
-  ignorePlatformCollision: 1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  allowCrossScreen: 1
-  cam: {fileID: 962498861}
 --- !u!212 &1364425749
 SpriteRenderer:
   m_ObjectHideFlags: 0
