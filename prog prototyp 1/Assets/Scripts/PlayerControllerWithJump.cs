@@ -25,7 +25,7 @@ public class PlayerControllerWithJump : MonoBehaviour
     public float fallMultiplier;
     public float lowJumpMultiplier;
 
-
+    private bool hasJumped;
 
 
     private void Start()
@@ -59,13 +59,13 @@ public class PlayerControllerWithJump : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
 
-            if (!IsGrounded())
+            if (IsGrounded())
             {
-                return;
+                rb.velocity = new Vector2(0, jumpForce);
+                
             }
             else
             {
-                rb.velocity += new Vector2(0, jumpForce);
             }
         }
 
